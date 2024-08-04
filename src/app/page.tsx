@@ -1,44 +1,20 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
+import HomeClient from "./HomeClient";
 
 export default async function Home() {
 	const hello = await api.post.hello({ text: "from tRPC" });
 
 	return (
 		<main className="p-6 sm:p-8 md:p-12 bg-white">
-			
 			{/* Hero Section */}
 			<section className="mb-16">
 				<h1 className="text-7xl font-semibold mb-4">Pocket Size Six-Pack for Pilots (and Cats)</h1>
 				<p className="text-2xl mb-6">
 					Open-source portable flight instrument suite powered by Next.js, tRPC, and an obsession with general aviation. Currently in feline and hooman beta testing.
 				</p>
-				<div className="flex gap-6">
-					<Link
-						href="https://github.com/yourusername/sixpack-avionics"
-						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
-                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
-                      transition-all duration-200 flex items-center justify-center"
-					>
-						Download App ↓
-					</Link>
-					<Link
-						href="https://github.com/yourusername/sixpack-avionics"
-						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-white
-                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
-                      transition-all duration-200 flex items-center justify-center"
-					>
-						GitHub →
-					</Link>
-				</div>
+				<HomeClient />
 			</section>
-
-
-
-
-
-
-
 
 			{/* Split Screen Section */}
 			<section className="flex flex-col md:flex-row gap-8 mb-16">
@@ -97,13 +73,6 @@ export default async function Home() {
 					))}
 				</div>
 			</section>
-
-
-
-
-
-
-
 
 			{/* Zigzag Section */}
 			<section className="mb-16">
