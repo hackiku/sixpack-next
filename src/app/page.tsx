@@ -6,9 +6,10 @@ export default async function Home() {
 
 	return (
 		<main className="p-6 sm:p-8 md:p-12 bg-white">
+			
 			{/* Hero Section */}
 			<section className="mb-16">
-				<h1 className="text-7xl font-semibold mb-4">Six-Pack for Pilots (and Cats)</h1>
+				<h1 className="text-7xl font-semibold mb-4">Pocket Size Six-Pack for Pilots (and Cats)</h1>
 				<p className="text-2xl mb-6">
 					Open-source portable flight instrument suite powered by Next.js, tRPC, and an obsession with general aviation. Currently in feline and hooman beta testing.
 				</p>
