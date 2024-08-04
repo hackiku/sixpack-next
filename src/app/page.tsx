@@ -1,53 +1,172 @@
 import Link from "next/link";
-
-import { LatestPost } from "~/app/_components/post";
-import { api, HydrateClient } from "~/trpc/server";
+import { api } from "~/trpc/server";
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
+	const hello = await api.post.hello({ text: "from tRPC" });
 
-  void api.post.getLatest.prefetch();
+	return (
+		<main className="p-6 sm:p-8 md:p-12 bg-white">
+			{/* Hero Section */}
+			<section className="mb-16">
+				<h1 className="text-7xl font-semibold mb-4">Six-Pack for Pilots (and Cats)</h1>
+				<p className="text-2xl mb-6">
+					Open-source portable flight instrument suite powered by Next.js, tRPC, and an obsession with general aviation. Currently in feline and hooman beta testing.
+				</p>
+				<div className="flex gap-6">
+					<Link
+						href="https://github.com/yourusername/sixpack-avionics"
+						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
+                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                      transition-all duration-200 flex items-center justify-center"
+					>
+						GitHub →
+					</Link>
+					<Link
+						href="https://buymeacoffee.com/yourusername"
+						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-white
+                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                      transition-all duration-200 flex items-center justify-center"
+					>
+						Buy us a coffee ☕
+					</Link>
+				</div>
+			</section>
 
-  return (
-    <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
-          </div>
+			{/* Split Screen Section */}
+			<section className="flex flex-col md:flex-row gap-8 mb-16">
+				<div className="w-full md:w-1/2 rounded-[2em] border-4 border-black px-8 py-12 bg-[#F65A4D]">
+					<h2 className="text-4xl font-bold mb-4">For Pilots</h2>
+					<p className="text-xl mb-4">Digitize your flight data for GA and gliders. Real-time stats and logging.</p>
+					<div className="aspect-video bg-black flex items-center justify-center text-white">
+						[Placeholder for pilot video]
+					</div>
+				</div>
+				<div className="w-full md:w-1/2 rounded-[2em] border-4 border-black px-8 py-12 bg-[#FFDB58]">
+					<h2 className="text-4xl font-bold mb-4">For Cats</h2>
+					<p className="text-xl mb-4">Yes, we're testing on animals! Track your cat's adventures around the house.</p>
+					<div className="aspect-video bg-black flex items-center justify-center text-white">
+						[Placeholder for cat video]
+					</div>
+				</div>
+			</section>
 
-          <LatestPost />
-        </div>
-      </main>
-    </HydrateClient>
-  );
+			{/* Features Section */}
+			<section className="mb-16">
+				<h2 className="text-5xl font-bold mb-8">Features</h2>
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+					{[
+						{ title: "6DOF Sensing", description: "Measure pitch, roll, yaw, and acceleration in three axes." },
+						{ title: "Airspeed", description: "Accurate airspeed measurements for precise flight data." },
+						{ title: "GPS Tracking", description: "Log your exact position and path during flight or feline adventures." },
+						{ title: "Compass/Heading", description: "Always know your orientation with integrated compass." },
+						{ title: "Bluetooth Connectivity", description: "Seamless data transmission to your mobile device." },
+						{ title: "Data Logging", description: "Store and analyze your flight or cat movement data over time." },
+					].map((feature, index) => (
+						<div key={index} className="border-2 border-black p-4 hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] transition-all duration-200">
+							<h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+							<p>{feature.description}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			{/* Timeline Section */}
+			<section className="mb-16">
+				<h2 className="text-5xl font-bold mb-8">Project Timeline</h2>
+				<div className="flex flex-wrap justify-between">
+					{[
+						{ phase: "Proof of Concept", status: "completed" },
+						{ phase: "App Beta (Android & iOS)", status: "in-progress" },
+						{ phase: "Custom Hardware (PCB)", status: "not-started" },
+						{ phase: "Distribution", status: "not-started" },
+						{ phase: "Certification", status: "not-started" },
+					].map((item, index) => (
+						<div key={index} className={`w-16 h-16 rounded-full border-4 border-black flex items-center justify-center text-2xl font-bold mb-4 ${item.status === 'completed' ? 'bg-green-400' :
+							item.status === 'in-progress' ? 'bg-yellow-400' : 'bg-white'
+							}`}>
+							{index + 1}
+						</div>
+					))}
+				</div>
+			</section>
+
+			{/* Zigzag Section */}
+			<section className="mb-16">
+				<div className="flex flex-col md:flex-row items-center mb-8">
+					<div className="w-full md:w-1/2 p-8">
+						<h3 className="text-3xl font-bold mb-4">For the Curious Cat</h3>
+						<ul className="list-disc pl-5">
+							<li>Track your cat's daily adventures</li>
+							<li>Analyze sleep patterns and activity levels</li>
+							<li>Discover your cat's favorite spots in the house</li>
+						</ul>
+					</div>
+					<div className="w-full md:w-1/2 bg-gray-200 h-64 flex items-center justify-center">
+						[Cat Image Placeholder]
+					</div>
+				</div>
+				<div className="flex flex-col md:flex-row-reverse items-center">
+					<div className="w-full md:w-1/2 p-8">
+						<h3 className="text-3xl font-bold mb-4">For the Adventurous Pilot</h3>
+						<ul className="list-disc pl-5">
+							<li>Real-time flight data on your phone</li>
+							<li>Log and analyze your flights</li>
+							<li>Improve your piloting skills with data-driven insights</li>
+						</ul>
+					</div>
+					<div className="w-full md:w-1/2 bg-gray-200 h-64 flex items-center justify-center">
+						[Pilot Image Placeholder]
+					</div>
+				</div>
+			</section>
+
+			{/* Open Source Section */}
+			<section className="mb-16">
+				<h2 className="text-5xl font-bold mb-4">Open Source</h2>
+				<p className="text-xl mb-4">
+					We believe in the power of community. That's why our project is open source, allowing developers and enthusiasts to contribute, modify, and improve the system.
+				</p>
+				<Link
+					href="https://github.com/yourusername/sixpack-avionics"
+					className="inline-block text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
+                    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                    transition-all duration-200"
+				>
+					Check out our GitHub →
+				</Link>
+			</section>
+
+			{/* CTA Section */}
+			<section className="text-center">
+				<h2 className="text-5xl font-bold mb-4">Ready to Take Flight?</h2>
+				<p className="text-xl mb-6">Join our journey in revolutionizing flight data for pilots and cat owners alike!</p>
+				<div className="flex justify-center gap-6">
+					<Link
+						href="#"
+						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
+                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                      transition-all duration-200"
+					>
+						Pre-order Now
+					</Link>
+					<Link
+						href="#"
+						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-white
+                      shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+                      transition-all duration-200"
+					>
+						Join Our Newsletter
+					</Link>
+				</div>
+			</section>
+
+			{/* tRPC Demo Section */}
+			<section className="mt-16 text-center">
+				<h2 className="text-5xl font-bold mb-4">tRPC Demo</h2>
+				<p className="text-2xl text-black">
+					{hello ? hello.greeting : "Loading tRPC query..."}
+				</p>
+			</section>
+		</main>
+	);
 }
