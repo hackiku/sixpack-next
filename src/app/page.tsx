@@ -20,18 +20,25 @@ export default async function Home() {
                       shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
                       transition-all duration-200 flex items-center justify-center"
 					>
-						GitHub →
+						Download App ↓
 					</Link>
 					<Link
-						href="https://buymeacoffee.com/yourusername"
+						href="https://github.com/yourusername/sixpack-avionics"
 						className="text-xl font-semibold px-6 py-2 border-2 border-black bg-white
                       shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
                       transition-all duration-200 flex items-center justify-center"
 					>
-						Buy us a coffee ☕
+						GitHub →
 					</Link>
 				</div>
 			</section>
+
+
+
+
+
+
+
 
 			{/* Split Screen Section */}
 			<section className="flex flex-col md:flex-row gap-8 mb-16">
@@ -90,6 +97,13 @@ export default async function Home() {
 					))}
 				</div>
 			</section>
+
+
+
+
+
+
+
 
 			{/* Zigzag Section */}
 			<section className="mb-16">
