@@ -1,100 +1,118 @@
 // app/redocly/page.tsx
 
 import React from 'react';
-import Link from 'next/link';
 import { redHatDisplay } from './RedHatDisplay';
 
-const footerSections = {
-	Products: ['Redoc', 'Revel', 'Reef', 'Realm', 'Reunite', 'Redocly CLI'],
-	Explore: ['Pricing', 'Pro', 'Enterprise', 'Enterprise Plus', 'Customers', 'About Us', 'Careers'],
-	Resources: ['Docs', 'Blog', 'Webinars', 'Why Redocly', 'Startup Discount', 'Docs-like-code'],
-	'Tech & legal': ['Security', 'Tech Stack', 'Status', 'Terms', 'SLA', 'DPA'],
+interface CTAButton {
+	text: string;
+	isPrimary: boolean;
+	color?: string;
+}
+
+interface CTAData {
+	productName: string;
+	title: string;
+	description: string;
+	color: string;
+	buttons: CTAButton[];
+}
+
+const ctaData: CTAData[] = [
+	{
+		productName: 'Redoc',
+		title: 'is more than API docs',
+		description: "It's the foundation for developer engagement and API success.",
+		color: '#0066FF',
+		buttons: [
+			{ text: 'Join the waitlist', isPrimary: true },
+			{ text: 'Discover More', isPrimary: false },
+		],
+	},
+	{
+		productName: 'Reef',
+		title: 'dive into your API ecosystem',
+		description: 'Let your developers surprise you with their ingenuity. Discover and empower all APIs in your organization.',
+		color: '#A45CFF',
+		buttons: [
+			{ text: 'Join the waitlist', isPrimary: true, color: '#A45CFF' },
+		],
+	},
+	{
+		productName: 'Revel',
+		title: 'in your API documentation',
+		description: 'Create beautiful, interactive API documentation that developers love.',
+		color: '#FF6B00',
+		buttons: [
+			{ text: 'Try Revel now', isPrimary: true, color: '#FF6B00' },
+			{ text: 'Learn more', isPrimary: false },
+		],
+	},
+];
+
+const CTAButton: React.FC<CTAButton & { defaultColor: string }> = ({ text, isPrimary, color, defaultColor }) => {
+	const buttonColor = color || defaultColor;
+	return isPrimary ? (
+		<button
+			className="font-bold py-3 px-6 rounded-full text-white transition duration-300"
+			style={{ backgroundColor: buttonColor, borderColor: buttonColor }}
+		>
+			{text}
+		</button>
+	) : (
+		<button
+			className="bg-white font-bold py-3 px-6 rounded-full border-2 transition duration-300"
+			style={{ color: buttonColor, borderColor: buttonColor }}
+		>
+			{text}
+		</button>
+	);
 };
 
-const RedoclyPage = () => {
+const CTACard: React.FC<CTAData> = ({ productName, title, description, color, buttons }) => (
+	<div className="bg-white rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center w-full flex-shrink-0 mb-8">
+		<div className="md:w-1/2 mb-8 md:mb-0">
+			<h2 className="text-4xl md:text-5xl font-bold mb-4">
+				<span style={{ color }}>{productName}</span> {title}
+			</h2>
+		</div>
+		<div className="md:w-1/2 md:pl-8">
+			<p className="text-xl mb-6">{description}</p>
+			<div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+				{buttons.map((button, index) => (
+					<CTAButton key={index} {...button} defaultColor={color} />
+				))}
+			</div>
+		</div>
+	</div>
+);
+
+const RedoclyPage: React.FC = () => {
 	return (
 		<div className="bg-[#EDEDF2]" style={{ fontFamily: redHatDisplay.style.fontFamily }}>
 
-		{/* <div className={`bg-[#EDEDF2] ${redHatDisplay.variable} XXfont-sans`}> */}
-			{/* Redoc Slider Section */}
-			<section className="py-16">
-				<div className="container mx-auto px-4">
-					<div className="bg-white rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center">
-						<div className="md:w-1/2 mb-8 md:mb-0">
-							<h2 className="text-4xl md:text-5xl font-bold mb-4">
-								<span className="text-[#0066FF]">Redoc</span> is more than API docs
-							</h2>
-						</div>
-						<div className="md:w-1/2 md:pl-8">
-							<p className="text-xl mb-6">
-								It's the foundation for developer engagement and API success.
-							</p>
-							<div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-								<button className="bg-[#212121] text-white font-bold py-3 px-6 rounded-full hover:bg-gray-800 transition duration-300">
-									Join the waitlist
-								</button>
-								<button className="bg-white text-[#212121] font-bold py-3 px-6 rounded-full border-2 border-[#212121] hover:bg-gray-100 transition duration-300">
-									Discover More
-								</button>
-							</div>
-						</div>
-					</div>
+			<section className="relative overflow-hidden -mt-24 -mb-8">
+				<div className="container mx-auto px-5">
+					<img
+						src="redocly/circle.png"
+						alt="Orbiter"
+						className="w-full max-w-xl mx-auto"
+					/>
 				</div>
 			</section>
 
-			{/* Reef CTA Section */}
-			<section className="py-16">
+			<section className="py-8">
 				<div className="container mx-auto px-4">
-					<div className="bg-white rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center">
-						<div className="md:w-1/2 mb-8 md:mb-0">
-							<h2 className="text-3xl md:text-5xl font-semibold">
-								<span className="text-[#A45CFF]">Reef:</span> dive into your API ecosystem
-							</h2>
-						</div>
-						<div className="md:w-1/2 md:pl-8">
-							<p className="text-xl mb-6">
-								Let your developer surprise you with their ingenuity. Discover and empower all APIs in your organization.
-							</p>
-							<button className="bg-[#A45CFF] text-white font-bold py-3 px-6 rounded-full hover:bg-purple-700 transition duration-300">
-								Join the waitlist
-							</button>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			{/* Footer */}
-			<footer className="bg-white py-12">
-				<div className="container mx-auto px-4">
-					<div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
-						{Object.entries(footerSections).map(([title, items], index) => (
-							<div key={index}>
-								<h3 className="font-bold text-lg mb-4">{title}</h3>
-								<ul className="space-y-2">
-									{items.map((item) => (
-										<li key={item}>
-											<a href="#" className="text-gray-600 hover:text-[#A45CFF]">{item}</a>
-										</li>
-									))}
-								</ul>
-							</div>
+					<div className="overflow-x-auto flex space-x-8 pb-8" style={{ cursor: 'pointer' }}>
+						{ctaData.map((cta, index) => (
+							<CTACard key={index} {...cta} />
 						))}
-						<div>
-							<h3 className="font-bold text-lg mb-4">Contact us</h3>
-							<div className="flex space-x-4 mb-4">
-								<a href="#" className="text-gray-600 hover:text-[#A45CFF]">GitHub</a>
-								<a href="#" className="text-gray-600 hover:text-[#A45CFF]">LinkedIn</a>
-								<a href="#" className="text-gray-600 hover:text-[#A45CFF]">Twitter</a>
-								<a href="#" className="text-gray-600 hover:text-[#A45CFF]">YouTube</a>
-							</div>
-							<Link href="#" className="text-[#A45CFF] font-semibold hover:underline">Contact Us</Link>
-						</div>
-					</div>
-					<div className="border-t border-gray-300 pt-8 text-center">
-						<p className="text-gray-600">© 2024 Redocly Inc. All rights reserved.</p>
 					</div>
 				</div>
-			</footer>
+			</section>
+
+			<section className="mt-16">
+				<img src="redocly/footer.png" alt="" className="w-full" />
+			</section>
 		</div>
 	);
 };
