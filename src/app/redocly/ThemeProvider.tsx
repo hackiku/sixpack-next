@@ -2,87 +2,10 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ctaData, CTAData, CTAButton as CTAButtonType } from './ctaData';
 
-interface CTAButton {
-	text: string;
-	isPrimary: boolean;
-	color?: string;
-}
-
-interface CTAData {
-	productName: string;
-	title: string;
-	description: string;
-	color: string;
-	buttons: CTAButton[];
-	gradient?: boolean;
-}
-
-interface CTAData {
-	productName: string;
-	title: string;
-	description: string;
-	color: string;
-	buttons: CTAButton[];
-	gradient?: boolean;
-}
-
-const ctaData: CTAData[] = [
-	{
-		productName: 'Reunite',
-		title: 'Collaborative editor suite',
-		description: "Streamline your documentation process with our powerful collaborative editing tools.",
-		color: '#4CAF50',
-		buttons: [
-			{ text: 'Try Reunite', isPrimary: true },
-			{ text: 'Learn more', isPrimary: false },
-		],
-	},
-	{
-		productName: 'Revel',
-		title: 'External developer showcase',
-		description: 'Create beautiful, interactive API documentation that developers love.',
-		color: '#FF6B00',
-		buttons: [
-			{ text: 'Try Revel now', isPrimary: true },
-			{ text: 'Learn more', isPrimary: false },
-		],
-	},
-	{
-		productName: 'Redoc',
-		title: 'API reference and mock server',
-		description: "The foundation for developer engagement and API success.",
-		color: '#0066FF',
-		buttons: [
-			{ text: 'Explore Redoc', isPrimary: true },
-			{ text: 'View Demo', isPrimary: false },
-		],
-	},
-	{
-		productName: 'Reef',
-		title: 'Internal service catalog',
-		description: 'Discover and empower all APIs in your organization with our comprehensive internal catalog.',
-		color: '#A45CFF',
-		buttons: [
-			{ text: 'Learn about Reef', isPrimary: true },
-			{ text: 'Request Demo', isPrimary: false },
-		],
-	},
-	{
-		productName: 'Realm',
-		title: 'Combo of Redoc, Revel, and Reef',
-		description: 'Unlock the full potential of your APIs with our comprehensive ecosystem.',
-		color: 'rgb(22, 119, 255)',
-		buttons: [
-			{ text: 'Explore Realm', isPrimary: true },
-			{ text: 'Get Pricing', isPrimary: false },
-		],
-		gradient: true,
-	},
-];
-
-const CTAButton: React.FC<CTAButton & { defaultColor: string; isDarkMode: boolean }> = ({ text, isPrimary, color, defaultColor, isDarkMode }) => {
+const CTAButton: React.FC<CTAButtonType & { defaultColor: string; isDarkMode: boolean }> = ({ text, isPrimary, color, defaultColor, isDarkMode }) => {
 	const buttonColor = color || defaultColor;
 	return isPrimary ? (
 		<button
@@ -102,7 +25,7 @@ const CTAButton: React.FC<CTAButton & { defaultColor: string; isDarkMode: boolea
 };
 
 const CTACard: React.FC<CTAData & { isDarkMode: boolean }> = ({ productName, title, description, color, buttons, gradient, isDarkMode }) => (
-	<div className={`rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center w-full flex-shrink-0 mb-8 ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
+	<div className={`rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center w-full flex-shrink-0 ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
 		<div className="md:w-1/2 mb-8 md:mb-0">
 			<h2 className="text-4xl md:text-5xl font-bold mb-4">
 				<span
@@ -135,41 +58,84 @@ const ThemeToggle: React.FC<{ isDarkMode: boolean; toggleTheme: () => void }> = 
 		className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-10 px-4 py-2 rounded-full transition-colors duration-200 ${isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
 			}`}
 	>
-		{isDarkMode ? 'Light Mode' : 'Dark Mode'}
+		{isDarkMode ? 'Light Cards' : 'Dark Cards'}
 	</button>
 );
 
 const ThemeProvider: React.FC = () => {
 	const [isDarkMode, setIsDarkMode] = useState(false);
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const [isDragging, setIsDragging] = useState(false);
+	const [startX, setStartX] = useState(0);
+	const sliderRef = useRef<HTMLDivElement>(null);
 
 	const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
+	const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+		setIsDragging(true);
+		setStartX(e.clientX);
+	};
+
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (!isDragging) return;
+		const diff = startX - e.clientX;
+		setScrollPosition(prev => prev + diff);
+		setStartX(e.clientX);
+	};
+
+	const handleMouseUp = () => {
+		setIsDragging(false);
+	};
+
+	useEffect(() => {
+		const slider = sliderRef.current;
+		if (slider) {
+			const cardWidth = slider.clientWidth;
+			const totalWidth = cardWidth * ctaData.length;
+			let newPosition = scrollPosition % totalWidth;
+			if (newPosition < 0) newPosition += totalWidth;
+			slider.style.transform = `translateX(-${newPosition}px)`;
+		}
+	}, [scrollPosition]);
+
+	const renderCards = () => {
+		const cards = [];
+		for (let i = -1; i <= ctaData.length; i++) {
+			const index = i < 0 ? ctaData.length + i : i % ctaData.length;
+			cards.push(
+				<div key={i} className="w-4/5 flex-shrink-0 mx-8 select-none">
+					<CTACard {...ctaData[index]} isDarkMode={isDarkMode} />
+				</div>
+			);
+		}
+		return cards;
+	};
+
 	return (
-		<div className={`transition-colors duration-200 bg-[#EDEDF2]`}>
+		<div className="transition-colors duration-200 bg-[#EDEDF2]">
 			<ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
-			<section className="py-8 px-4">
-
-				<div className="container mx-auto">
-					<div className="overflow-x-auto flex space-x-8 pb-8">
-						{ctaData.map((cta, index) => (
-							<CTACard key={index} {...cta} isDarkMode={isDarkMode} />
-						))}
-					</div>
+			<section className="py-8 px-4 overflow-hidden ">
+				<div
+					ref={sliderRef}
+					className="flex transition-transform duration-300 ease-in-out cursor-grab active:cursor-grabbing"
+					onMouseDown={handleMouseDown}
+					onMouseMove={handleMouseMove}
+					onMouseUp={handleMouseUp}
+					onMouseLeave={handleMouseUp}
+				>
+					{renderCards()}
 				</div>
-
-				
 			</section>
 
 			<div className={`RoundedBackgroundCard-sc-1xixxpd-0 blYefm mx-auto max-w-3xl mb-12 p-8 rounded-3xl ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
-				<p className="BuildApi__Title-sc-1r921oh-1 jDpvLA text-3xl font-bold mb-4">Let's build API ubiquity, together</p>
+				<p className="BuildApi__Title-sc-1r921oh-1 jDpvLA text-3xl font-bold mb-4">Let's design for API ubiquity</p>
 				<a className="CustomButton__StyledButtonLink-sc-1bqbg7m-0 dBzsVE inline-block" rel="noreferrer" href="/join-the-waitlist" target="_self">
 					<button className="CustomButton__StyledButton-sc-1bqbg7m-1 fjnlDJ CustomButton__Button-sc-1bqbg7m-3 ipYSyd button-variant-dark bg-blue-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300">
 						Join the waitlist
 					</button>
 				</a>
 			</div>
-
 		</div>
 	);
 };
