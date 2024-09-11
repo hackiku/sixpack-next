@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
 import HomeClient from "./HomeClient";
+import ProductShow from "./_components/ProductShow";
 
 export default async function Home() {
 	const hello = await api.post.hello({ text: "from tRPC" });
@@ -8,19 +9,51 @@ export default async function Home() {
 	return (
 		<main className="p-6 sm:p-8 md:p-12 bg-white">
 			{/* Hero Section */}
-			<section className="mb-16">
-				<h1 className="text-7xl font-semibold mb-4">Pocket Size Six-Pack for Pilots (and Cats)</h1>
+			<section className="mb-16 md:w-5/6">
+				<h1 className="text-7xl font-semibold mb-4">Pocket Six-Pack for Pilots (and Cats)</h1>
 				<p className="text-2xl mb-6">
-					Open-source portable flight instrument suite powered by Next.js, tRPC, and an obsession with general aviation. Currently in feline and hooman beta testing.
+					Open-source portable flight instrument suite powered by Arduino, React-Native and love for flying. Currently in feline beta testing.
 				</p>
 				<HomeClient />
 			</section>
 
+			<hr className="border-2 mb-6 border-black"/>
+			{/* -------------------------------------------- */}
+			
+			<section>
+				<ProductShow />
+			</section>
+
+			{/* -------------------------------------------- */}
+			<hr className="border-2 mb-6 border-black"/>
+
+			{/* Open Source Section */}
+			<section className="mb-16">
+				<h2 className="text-5xl font-bold mb-4">Open Source</h2>
+				<p className="text-xl mb-4">
+					We believe in the power of community. That's why our project is open source, allowing developers and enthusiasts to contribute, modify, and improve the system.
+				</p>
+				<Link
+					href="https://github.com/yourusername/sixpack-avionics"
+					className="inline-block text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
+					shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
+					transition-all duration-200"
+				>
+					Check out our GitHub →
+				</Link>
+			</section>
+
+
+			{/* -------------------------------------------- */}
+			
+			<hr className="border-2 mb-6 border-black"/>
+
 			{/* Split Screen Section */}
+			<h2 className="text-4xl font-bold mb-4">Adding right rudder has never been easier</h2>
 			<section className="flex flex-col md:flex-row gap-8 mb-16">
 				<div className="w-full md:w-1/2 rounded-[2em] border-4 border-black px-8 py-12 bg-[#F65A4D]">
 					<h2 className="text-4xl font-bold mb-4">For Pilots</h2>
-					<p className="text-xl mb-4">Digitize your flight data for GA and gliders. Real-time stats and logging.</p>
+					<p className="text-xl mb-4">Add right rudder and digitize flight data (that stays yours). For GA and gliders.</p>
 					<div className="aspect-video bg-black flex items-center justify-center text-white">
 						[Placeholder for pilot video]
 					</div>
@@ -33,6 +66,10 @@ export default async function Home() {
 					</div>
 				</div>
 			</section>
+
+			{/* -------------------------------------------- */}
+			<hr className="border-2 mb-6 border-black" />
+
 
 			{/* Features Section */}
 			<section className="mb-16">
@@ -53,6 +90,10 @@ export default async function Home() {
 					))}
 				</div>
 			</section>
+
+			{/* -------------------------------------------- */}
+			<hr className="border-2 mb-6 border-black" />
+
 
 			{/* Timeline Section */}
 			<section className="mb-16">
@@ -78,15 +119,11 @@ export default async function Home() {
 			<section className="mb-16">
 				<div className="flex flex-col md:flex-row items-center mb-8">
 					<div className="w-full md:w-1/2 p-8">
-						<h3 className="text-3xl font-bold mb-4">For the Curious Cat</h3>
-						<ul className="list-disc pl-5">
-							<li>Track your cat's daily adventures</li>
-							<li>Analyze sleep patterns and activity levels</li>
-							<li>Discover your cat's favorite spots in the house</li>
-						</ul>
+						<h3 className="text-5xl font-semibold mb-4">More Right Rudder</h3>
+						<p className="text-2xl">Digitalize your flights and learn from the data.</p>
 					</div>
 					<div className="w-full md:w-1/2 bg-gray-200 h-64 flex items-center justify-center">
-						[Cat Image Placeholder]
+						[Pilot Image]
 					</div>
 				</div>
 				<div className="flex flex-col md:flex-row-reverse items-center">
@@ -104,25 +141,9 @@ export default async function Home() {
 				</div>
 			</section>
 
-			{/* Open Source Section */}
-			<section className="mb-16">
-				<h2 className="text-5xl font-bold mb-4">Open Source</h2>
-				<p className="text-xl mb-4">
-					We believe in the power of community. That's why our project is open source, allowing developers and enthusiasts to contribute, modify, and improve the system.
-				</p>
-				<Link
-					href="https://github.com/yourusername/sixpack-avionics"
-					className="inline-block text-xl font-semibold px-6 py-2 border-2 border-black bg-[#AE7AFF] hover:bg-[#d71e97]
-                    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] 
-                    transition-all duration-200"
-				>
-					Check out our GitHub →
-				</Link>
-			</section>
-
 			{/* CTA Section */}
-			<section className="text-center">
-				<h2 className="text-5xl font-bold mb-4">Ready to Take Flight?</h2>
+			<section className="text-center bg-[#AE7AFF] p-12 border-4 border-black">
+				<h2 className="text-5xl font-bold mb-4">Turn off airplane mode</h2>
 				<p className="text-xl mb-6">Join our journey in revolutionizing flight data for pilots and cat owners alike!</p>
 				<div className="flex justify-center gap-6">
 					<Link
@@ -144,13 +165,6 @@ export default async function Home() {
 				</div>
 			</section>
 
-			{/* tRPC Demo Section */}
-			<section className="mt-16 text-center">
-				<h2 className="text-5xl font-bold mb-4">tRPC Demo</h2>
-				<p className="text-2xl text-black">
-					{hello ? hello.greeting : "Loading tRPC query..."}
-				</p>
-			</section>
 		</main>
 	);
 }
