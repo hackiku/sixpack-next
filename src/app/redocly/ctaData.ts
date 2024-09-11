@@ -7,11 +7,11 @@ export interface CTAButton {
 }
 
 export interface CTAData {
-	productName: string;
-	title: string;
-	description: string;
-	color: string;
-	buttons: CTAButton[];
+	productName?: string;
+	title?: string;
+	description?: string;
+	color?: string;
+	buttons?: CTAButton[];
 	gradient?: boolean;
 }
 
@@ -28,7 +28,7 @@ export const ctaData: CTAData[] = [
 	},
 	{
 		productName: 'Redoc',
-		title: 'for API docs you\'ll be proud of',
+		title: 'for API docs to be proud of',
 		description: "Automagical API spec → reference docs, straight from git. The open source favorite, but with mock servers.",
 		color: '#0066FF',
 		buttons: [

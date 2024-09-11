@@ -31,7 +31,7 @@ export default async function Home() {
 			<section className="mb-16">
 				<h2 className="text-5xl font-bold mb-4">Open Source</h2>
 				<p className="text-xl mb-4">
-					We believe in the power of community. That's why our project is open source, allowing developers and enthusiasts to contribute, modify, and improve the system.
+					We believe in the power of community. That&apos;s why our project is open source, allowing developers and enthusiasts to contribute, modify, and improve the system.
 				</p>
 				<Link
 					href="https://github.com/yourusername/sixpack-avionics"
@@ -60,7 +60,7 @@ export default async function Home() {
 				</div>
 				<div className="w-full md:w-1/2 rounded-[2em] border-4 border-black px-8 py-12 bg-[#FFDB58]">
 					<h2 className="text-4xl font-bold mb-4">For Cats</h2>
-					<p className="text-xl mb-4">Yes, we're testing on animals! Track your cat's adventures around the house.</p>
+					<p className="text-xl mb-4">Yes, we&apos;re testing on animals! Track your cat&apos;s adventures around the house.</p>
 					<div className="aspect-video bg-black flex items-center justify-center text-white">
 						[Placeholder for cat video]
 					</div>

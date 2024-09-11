@@ -45,7 +45,7 @@ export default function Software() {
 					</div>
 					<div className="border-4 border-black p-6 bg-[#AE7AFF] transform rotate-1">
 						<h3 className="text-3xl font-bold mb-4">Cat Mode</h3>
-						<p>Switch to cat mode to track your feline friend's daily adventures.</p>
+						<p>Switch to cat mode to track your feline friends daily adventures.</p>
 					</div>
 				</div>
 			</section>
@@ -67,11 +67,11 @@ export default function Software() {
 				<h2 className="text-5xl font-bold mb-8">What Users Say</h2>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					<div className="border-2 border-black p-6 bg-white transform rotate-1">
-						<p className="italic mb-4">"This app has revolutionized my flying experience!"</p>
+						<p className="italic mb-4">&quot;This app has revolutionized my flying experience!&quot;</p>
 						<p className="font-bold">- John Doe, Private Pilot</p>
 					</div>
 					<div className="border-2 border-black p-6 bg-white transform -rotate-1">
-						<p className="italic mb-4">"I finally know what my cat does all day!"</p>
+						<p className="italic mb-4">&quot;I finally know what my cat does all day!&quot;</p>
 						<p className="font-bold">- Jane Smith, Cat Enthusiast</p>
 					</div>
 				</div>

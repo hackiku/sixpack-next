@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ctaData, CTAData, CTAButton as CTAButtonType } from './ctaData';
 
 const CTAButton: React.FC<CTAButtonType & { defaultColor: string; isDarkMode: boolean }> = ({ text, isPrimary, color, defaultColor, isDarkMode }) => {
-	const buttonColor = color || defaultColor;
+	const buttonColor = color ?? defaultColor;
 	return isPrimary ? (
 		<button
 			className={`font-semibold py-3 px-6 rounded-full transition duration-300 ${isDarkMode ? 'text-white' : 'text-white'}`}
@@ -24,7 +24,17 @@ const CTAButton: React.FC<CTAButtonType & { defaultColor: string; isDarkMode: bo
 	);
 };
 
-const CTACard: React.FC<CTAData & { isDarkMode: boolean }> = ({ productName, title, description, color, buttons, gradient, isDarkMode }) => (
+
+const CTACard: React.FC<CTAData & { isDarkMode: boolean; isCurrent: boolean }> = ({
+	productName,
+	title = "",
+	description = "",
+	color = "#000000",
+	buttons = [],
+	gradient = false,
+	isDarkMode,
+	isCurrent
+}) => (
 	<div className={`rounded-[2em] p-8 md:p-12 flex flex-col md:flex-row items-center w-full flex-shrink-0 ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
 		<div className="md:w-1/2 mb-8 md:mb-0">
 			<h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -102,14 +112,20 @@ const ThemeProvider: React.FC = () => {
 		const cards = [];
 		for (let i = -1; i <= ctaData.length; i++) {
 			const index = i < 0 ? ctaData.length + i : i % ctaData.length;
+			const isCurrent = i === Math.floor(scrollPosition / (sliderRef.current?.clientWidth ?? 1) * 0.8 + 64);
 			cards.push(
-				<div key={i} className="w-4/5 flex-shrink-0 mx-8 select-none">
-					<CTACard {...ctaData[index]} isDarkMode={isDarkMode} />
+				<div
+					key={i}
+					className="w-4/5 flex-shrink-0 mx-8 select-none"
+					style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}
+				>
+					<CTACard {...ctaData[index]} isDarkMode={isDarkMode} isCurrent={isCurrent} />
 				</div>
 			);
 		}
 		return cards;
 	};
+
 
 	return (
 		<div className="transition-colors duration-200 bg-[#EDEDF2]">
@@ -129,7 +145,7 @@ const ThemeProvider: React.FC = () => {
 			</section>
 
 			<div className={`RoundedBackgroundCard-sc-1xixxpd-0 blYefm mx-auto max-w-3xl mb-12 p-8 rounded-3xl ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
-				<p className="BuildApi__Title-sc-1r921oh-1 jDpvLA text-3xl font-bold mb-4">Let's design for API ubiquity</p>
+				<p className="BuildApi__Title-sc-1r921oh-1 jDpvLA text-3xl font-bold mb-4">Let&apos;s design for API ubiquity</p>
 				<a className="CustomButton__StyledButtonLink-sc-1bqbg7m-0 dBzsVE inline-block" rel="noreferrer" href="/join-the-waitlist" target="_self">
 					<button className="CustomButton__StyledButton-sc-1bqbg7m-1 fjnlDJ CustomButton__Button-sc-1bqbg7m-3 ipYSyd button-variant-dark bg-blue-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300">
 						Join the waitlist
