@@ -144,14 +144,14 @@ const ThemeProvider: React.FC = () => {
 				</div>
 			</section>
 
-			<div className={`RoundedBackgroundCard-sc-1xixxpd-0 blYefm mx-auto max-w-3xl mb-12 p-8 rounded-3xl ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
+			{/* <div className={`RoundedBackgroundCard-sc-1xixxpd-0 blYefm mx-auto max-w-3xl mb-12 p-8 rounded-3xl ${isDarkMode ? 'bg-[#22242B] text-white' : 'bg-white text-black'}`}>
 				<p className="BuildApi__Title-sc-1r921oh-1 jDpvLA text-3xl font-bold mb-4">Let&apos;s design for API ubiquity</p>
 				<a className="CustomButton__StyledButtonLink-sc-1bqbg7m-0 dBzsVE inline-block" rel="noreferrer" href="/join-the-waitlist" target="_self">
 					<button className="CustomButton__StyledButton-sc-1bqbg7m-1 fjnlDJ CustomButton__Button-sc-1bqbg7m-3 ipYSyd button-variant-dark bg-blue-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-blue-600 transition duration-300">
 						Join the waitlist
 					</button>
 				</a>
-			</div>
+			</div> */}
 		</div>
 	);
 };
