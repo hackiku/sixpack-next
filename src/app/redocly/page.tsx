@@ -14,11 +14,11 @@ const RedoclyPage: React.FC = () => {
 			
 			<Orbiter />
 
-			<section className="relative overflow-hidden -mt-40 -mb-16">
+			{/* <section className="relative overflow-hidden -mt-40 -mb-16">
 				<div className="container mx-auto px-5 relative" style={{ zIndex: 1 }}>
 					<Slider />
 				</div>
-			</section>
+			</section> */}
 
 			<DynamicThemeProvider />
 
