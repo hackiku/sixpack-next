@@ -1,7 +1,15 @@
 // ~/app/_components/cta/EmailForm.tsx
+'use client'
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import OSToggle, { Platform } from './OSToggle';
+
+interface PilotEmail {
+	readonly [index: number]: string;
+	indexOf(searchElement: string, fromIndex?: number): number;
+	length: number;
+}
 
 interface EmailFormProps {
 	variant?: 'inline' | 'stacked';
@@ -9,13 +17,13 @@ interface EmailFormProps {
 	className?: string;
 }
 
-const PILOT_EMAILS = [
+const PILOT_EMAILS: PilotEmail = [
 	'talktome@goose.mil',
 	'sully@hudson.river',
 	'chuck@yeager.test',
 	'amelia@lockheed.electra',
 	'pylote@cezzna.me'
-];
+] as const;
 
 export default function EmailForm({
 	variant = 'inline',
@@ -25,15 +33,14 @@ export default function EmailForm({
 	const [email, setEmail] = useState('');
 	const [platform, setPlatform] = useState<Platform>('android');
 	const [showMessage, setShowMessage] = useState(false);
-	const [placeholder, setPlaceholder] = useState(PILOT_EMAILS[0]);
+	const [placeholder, setPlaceholder] = useState<string>(PILOT_EMAILS[0]);
 	const router = useRouter();
 
-	// Rotate through fun email placeholders
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setPlaceholder(prev => {
+			setPlaceholder((prev) => {
 				const currentIndex = PILOT_EMAILS.indexOf(prev);
-				return PILOT_EMAILS[(currentIndex + 1) % PILOT_EMAILS.length];
+				return PILOT_EMAILS[(currentIndex + 1) % PILOT_EMAILS.length] as PilotEmail[number];
 			});
 		}, 3000);
 
@@ -52,7 +59,6 @@ export default function EmailForm({
 
 			if (!response.ok) throw new Error('Subscription failed');
 
-			// For Android or both, redirect to demo
 			if (platform !== 'ios') {
 				router.push('/demo');
 			} else {
@@ -64,16 +70,8 @@ export default function EmailForm({
 		}
 	};
 
-	const containerClasses = `
-    w-full max-w-lg mx-auto 
-    ${className}
-  `;
-
-	const formClasses = `
-    flex ${variant === 'inline' ? 'flex-row sm:flex-row' : 'flex-col'} 
-    gap-4 w-full
-  `;
-
+	const containerClasses = `w-full max-w-lg mx-auto ${className}`;
+	const formClasses = `flex ${variant === 'inline' ? 'flex-row sm:flex-row' : 'flex-col'} gap-4 w-full`;
 	const inputClasses = `
     flex-1 px-4 py-2 border-4 border-black bg-white text-xl
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
@@ -82,7 +80,6 @@ export default function EmailForm({
     transition-all duration-200
     placeholder:text-gray-400 placeholder:italic
   `;
-
 	const buttonClasses = `
     px-6 py-2 text-xl border-4 border-black bg-[#AE7AFF]
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
@@ -135,3 +132,4 @@ export default function EmailForm({
 		</div>
 	);
 }
+
