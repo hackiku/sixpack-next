@@ -3,6 +3,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import EmailForm from "~/app/_components/cta/EmailForm";
 import AppDemo from "~/app/_components/demo/AppDemo";
 import DeviceDemo from "~/app/_components/demo/DeviceDemo";
 
@@ -43,7 +44,8 @@ export default function HomePage() {
 
 	return (
 		<main className="bg-white relative">
-			{/* Hero */}
+			
+			{/* Hero ---------------------- */}
 			<section
 				className="min-h-screen pt-12 pb-32 relative overflow-hidden"
 				style={{
@@ -59,6 +61,10 @@ export default function HomePage() {
 						<p className="text-xl md:text-2xl">
 							Open-source portable flight instrument suite powered by Arduino, React-Native and love for flying.
 						</p>
+						<EmailForm
+							platform="android"
+							onSuccess={() => console.log('Success!')}
+						/>
 					</div>
 					<div className="w-full md:w-1/3">
 						<AppDemo
