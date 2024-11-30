@@ -1,3 +1,4 @@
+// ~/app/_components/sections/HeroSection.tsx
 "use client";
 
 import EmailForm from "../cta/EmailForm";
@@ -12,7 +13,7 @@ export default function HeroSection() {
 			}}
 		>
 			<div className="container mx-auto px-6">
-				<div className="max-w-3xl flex flex-col justify-start">
+				<div className="md:w-1/2 flex flex-col justify-start">
 					<h1 className="text-4xl md:text-7xl font-bold mt-24 mb-6">
 						Avionics for Pilots (and Cats)
 					</h1>

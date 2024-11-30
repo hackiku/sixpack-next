@@ -29,7 +29,7 @@ export default function FeaturesSection() {
 	return (
 		<section ref={ref} className="py-24">
 			<div className="container mx-auto px-6">
-				<div className="max-w-xl ml-8 md:ml-24">
+				<div className="md:w-1/2 md:ml-auto">
 					{features.map((feature, index) => (
 						<motion.div
 							key={index}

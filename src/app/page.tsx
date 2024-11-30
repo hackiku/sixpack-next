@@ -22,7 +22,6 @@ export default function HomePage() {
 
 	return (
 		<main ref={mainRef} className="bg-gray-300/70 relative">
-			{/* Dot pattern background wrapper */}
 			<div
 				className="relative"
 				style={{
@@ -37,7 +36,6 @@ export default function HomePage() {
 				<FeaturesSection />
 			</div>
 
-			{/* Purple sections */}
 			<div className="bg-[#AE7AFF]">
 				<HardwareSection />
 				<CtaSection />
