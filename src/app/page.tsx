@@ -9,9 +9,11 @@ import CtaSection from "~/app/_components/sections/CtaSection";
 import Footer from "~/app/_components/layout/Footer";
 import { useInView } from 'react-intersection-observer';
 
+import AppDemo from "~/app/_components/demo/AppDemo"
+
 export default function HomePage() {
 	return (
-		<main className="bg-white relative">
+		<main className="bg-gray-300/70 relative">
 			{/* Dot pattern background wrapper */}
 			<div className="relative"
 				style={{
@@ -21,6 +23,7 @@ export default function HomePage() {
 			>
 				<HeroSection />
 				<FeaturesSection />
+				{/* <AppDemo /> */}
 			</div>
 
 			{/* Purple sections */}
