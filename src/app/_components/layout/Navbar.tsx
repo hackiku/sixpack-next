@@ -13,7 +13,7 @@ export default function Navbar() {
 		<nav className="p-6 my-6 md:mx-12">
 			<div className="container mx-auto flex justify-between items-center">
 				<div className="flex items-center">
-					<Link href="/" className="text-2xl font-bold">SixPack</Link>
+					<Link href="/" className="text-2xl font-bold">6Pack</Link>
 					<span className="ml-2 inline-block bg-[#A6FAFE] text-xs font-semibold px-2 py-1 border-2 border-black">
 						BETA
 					</span>

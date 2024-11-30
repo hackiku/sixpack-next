@@ -38,12 +38,12 @@ export default function Home() {
 			{/* Hero */}
 			<section className="min-h-screen pt-12 pb-32 relative overflow-hidden"
 				style={{
-					backgroundImage: 'radial-gradient(#000 2px, transparent 2px)',
+					backgroundImage: 'radial-gradient(#000 1.2px, transparent 1.2px)',
 					backgroundSize: '32px 32px'
 				}}>
 				<div className="container mx-auto px-6 flex">
 					<div className="w-2/3 pr-12">
-						<h1 className="text-7xl font-bold mb-6">Pocket Six-Pack for Pilots (and Cats)</h1>
+						<h1 className="text-7xl font-bold mb-6">Pocket Six-Pack Avionics for Pilots (and Cats)</h1>
 						<p className="text-2xl">
 							Open-source portable flight instrument suite powered by Arduino, React-Native and love for flying.
 						</p>
