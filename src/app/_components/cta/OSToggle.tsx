@@ -1,9 +1,6 @@
 // ~/app/_components/cta/OSToggle.tsx
 'use client';
 
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
-
 export type Platform = 'android' | 'ios' | 'both';
 
 interface OSToggleProps {
@@ -69,7 +66,6 @@ export default function OSToggle({ value, onChange }: OSToggleProps) {
           overflow-hidden
         `}
 			>
-				{/* Diagonal stripes background when selected */}
 				{value === 'both' && (
 					<div
 						className="absolute inset-0 -z-10 opacity-20"
