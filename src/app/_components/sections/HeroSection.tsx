@@ -1,4 +1,3 @@
-// ~/app/_components/sections/HeroSection.tsx
 "use client";
 
 import EmailForm from "../cta/EmailForm";
@@ -13,9 +12,9 @@ export default function HeroSection() {
 			}}
 		>
 			<div className="container mx-auto px-6">
-				<div className="max-w-3xl">
-					<h1 className="text-4xl md:text-7xl font-bold mb-6">
-						Pocket Six-Pack Avionics for Pilots (and Cats)
+				<div className="max-w-3xl flex flex-col justify-start">
+					<h1 className="text-4xl md:text-7xl font-bold mt-24 mb-6">
+						Avionics for Pilots (and Cats)
 					</h1>
 					<p className="text-xl md:text-2xl mb-8">
 						Open-source portable flight instrument suite powered by Arduino,
@@ -27,3 +26,4 @@ export default function HeroSection() {
 		</section>
 	);
 }
+

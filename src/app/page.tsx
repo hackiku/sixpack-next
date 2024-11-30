@@ -2,28 +2,39 @@
 
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import HeroSection from "~/app/_components/sections/HeroSection";
 import FeaturesSection from "~/app/_components/sections/FeaturesSection";
 import HardwareSection from "~/app/_components/sections/HardwareSection";
 import CtaSection from "~/app/_components/sections/CtaSection";
 import Footer from "~/app/_components/layout/Footer";
-import { useInView } from 'react-intersection-observer';
-
-import AppDemo from "~/app/_components/demo/AppDemo"
+import AppDemo from "~/app/_components/demo/AppDemo";
 
 export default function HomePage() {
+	const mainRef = useRef<HTMLElement>(null);
+	const { scrollYProgress } = useScroll({
+		target: mainRef,
+		offset: ["start start", "end start"]
+	});
+
+	const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
 	return (
-		<main className="bg-gray-300/70 relative">
+		<main ref={mainRef} className="bg-gray-300/70 relative">
 			{/* Dot pattern background wrapper */}
-			<div className="relative"
+			<div
+				className="relative"
 				style={{
 					backgroundImage: 'radial-gradient(#000 1.2px, transparent 1.2px)',
 					backgroundSize: '32px 32px'
 				}}
 			>
-				<HeroSection />
+				<motion.div style={{ opacity }}>
+					<HeroSection />
+				</motion.div>
+				<AppDemo scrollYProgress={scrollYProgress} />
 				<FeaturesSection />
-				{/* <AppDemo /> */}
 			</div>
 
 			{/* Purple sections */}
@@ -35,3 +46,4 @@ export default function HomePage() {
 		</main>
 	);
 }
+
