@@ -13,7 +13,7 @@ export default function HeroSection() {
 			}}
 		>
 			<div className="container mx-auto px-6">
-				<div className="md:w-1/2 flex flex-col justify-start">
+				<div className="md:w-2/3 flex flex-col justify-start">
 					<h1 className="text-4xl md:text-7xl font-bold mt-24 mb-6">
 						Avionics for Pilots (and Cats)
 					</h1>

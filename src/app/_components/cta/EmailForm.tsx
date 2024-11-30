@@ -1,9 +1,10 @@
 // ~/app/_components/cta/EmailForm.tsx
 'use client';
 
+import type { Platform } from './OSToggle';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import OSToggle, { Platform } from './OSToggle';
+import OSToggle from './OSToggle';
 
 interface EmailFormProps {
 	variant?: 'inline' | 'stacked';
@@ -65,7 +66,7 @@ export default function EmailForm({
 		}
 	};
 
-	const containerClasses = `w-full max-w-lg mx-auto ${className}`;
+	const containerClasses = `w-full max-w-lg ${className}`;
 	const formClasses = `flex ${variant === 'inline' ? 'flex-row sm:flex-row' : 'flex-col'
 		} gap-4 w-full`;
 	const inputClasses = `
@@ -91,7 +92,7 @@ export default function EmailForm({
 		return (
 			<div className={containerClasses}>
 				<div className="relative text-xl font-bold p-6 border-4 border-black bg-[#A6FAFF] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-					You're on the iOS waitlist! We'll notify you when it's ready for takeoff.
+					You&apos;re on the iOS waitlist! We&apos;ll notify you when it&apos;s ready for takeoff.
 					<button
 						onClick={() => setShowMessage(false)}
 						className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-[#AE7AFF] text-black rounded-full border-2 border-black"

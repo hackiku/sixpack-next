@@ -2,7 +2,8 @@
 
 "use client";
 
-import { motion, useTransform, MotionValue } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
 interface AppDemoProps {

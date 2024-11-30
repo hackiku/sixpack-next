@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import HeroSection from "~/app/_components/sections/HeroSection";
 import FeaturesSection from "~/app/_components/sections/FeaturesSection";
-import HardwareSection from "~/app/_components/sections/HardwareSection";
+// import HardwareSection from "~/app/_components/sections/HardwareSection";
 import CtaSection from "~/app/_components/sections/CtaSection";
 import Footer from "~/app/_components/layout/Footer";
 import AppDemo from "~/app/_components/demo/AppDemo";
@@ -37,7 +37,7 @@ export default function HomePage() {
 			</div>
 
 			<div className="bg-[#AE7AFF]">
-				<HardwareSection />
+				{/* <HardwareSection /> */}
 				<CtaSection />
 			</div>
 			<Footer />

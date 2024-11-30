@@ -1,6 +1,7 @@
 // ~/app/_components/cta/OSToggle.tsx
 'use client';
 
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 
 export type Platform = 'android' | 'ios' | 'both';
