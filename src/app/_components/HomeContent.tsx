@@ -48,12 +48,3 @@ export default function HomeContent() {
 		</>
 	);
 }
-
-// page.tsx
-export default function Home() {
-	return (
-		<main className="bg-white">
-			<HomeContent />
-		</main>
-	);
-}
