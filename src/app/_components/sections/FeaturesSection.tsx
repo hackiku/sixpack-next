@@ -1,5 +1,4 @@
 // ~/app/_components/sections/FeaturesSection.tsx
-
 "use client";
 import { motion } from 'framer-motion';
 
@@ -28,8 +27,8 @@ export default function FeaturesSection() {
 	return (
 		<section className="py-24 relative">
 			<div className="container mx-auto px-6">
-				{/* Left margin increased to make space for app demo */}
-				<div className="md:w-1/2 md:ml-[55%] space-y-48"> {/* Adjusted spacing */}
+				{/* Changed to right alignment */}
+				<div className="md:w-1/2 md:ml-auto space-y-48">
 					{features.map((feature, index) => (
 						<motion.div
 							key={feature.id}
@@ -53,7 +52,6 @@ export default function FeaturesSection() {
 								<p className="text-xl text-gray-600">{feature.description}</p>
 							</div>
 
-							{/* Decorative element */}
 							<div
 								className="absolute -z-10 -top-4 -left-4 w-full h-full rounded-xl"
 								style={{ background: feature.color }}

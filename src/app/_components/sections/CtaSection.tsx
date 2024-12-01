@@ -1,4 +1,5 @@
 // ~/app/_components/sections/CtaSection.tsx
+"use client";
 
 import EmailForm from "../cta/EmailForm";
 import { useInView } from 'react-intersection-observer';
@@ -13,11 +14,12 @@ export default function CtaSection() {
 		<section
 			ref={ref}
 			className={`
-        py-24 border-t-4 border-black text-center
+        py-24 border-t-4 border-black text-center bg-[#AE7AFF]
         transform transition-all duration-700
         ${inView ? 'translate-y-0 opacity-100' : 'translate-y-32 opacity-0'}
       `}
 		>
+
 			<div className="container mx-auto px-6">
 				{/* Timeline */}
 				<div className="mb-24">
