@@ -29,7 +29,7 @@ export default function FeaturesSection() {
 			<div className="container mx-auto px-6">
 				{/* Changed to right alignment */}
 				<div className="md:w-1/2 md:ml-auto space-y-48">
-					{features.map((feature, index) => (
+					{features.map((feature) => (
 						<motion.div
 							key={feature.id}
 							className="relative"
