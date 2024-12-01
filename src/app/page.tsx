@@ -29,11 +29,13 @@ export default function HomePage() {
 					backgroundSize: '32px 32px'
 				}}
 			>
-				<motion.div style={{ opacity }}>
-					<HeroSection />
-				</motion.div>
-				<AppDemo scrollYProgress={scrollYProgress} />
-				<FeaturesSection />
+				<div className="relative">
+					<motion.div style={{ opacity }}>
+						<HeroSection />
+					</motion.div>
+					<AppDemo scrollYProgress={scrollYProgress} />
+					<FeaturesSection />
+				</div>
 			</div>
 
 			<div className="bg-[#AE7AFF]">
