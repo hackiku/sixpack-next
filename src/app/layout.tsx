@@ -1,10 +1,11 @@
-// app/layout.tsx
-
+// ~/app/layout.tsx
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "./_components/layout/Navbar";
+import Footer from "./_components/layout/Footer";
+import { LayoutProvider } from "~/app/providers/LayoutContext";
 
 export const metadata: Metadata = {
 	title: "6Pack | Avionics for pilots and cats",
@@ -19,7 +20,10 @@ export default function RootLayout({
 		<html lang="en" className={`${GeistSans.variable}`}>
 			<body>
 				<Navbar />
-				<TRPCReactProvider>{children}</TRPCReactProvider>
+				<TRPCReactProvider>
+					<LayoutProvider>{children}</LayoutProvider>
+				</TRPCReactProvider>
+				<Footer />
 			</body>
 		</html>
 	);

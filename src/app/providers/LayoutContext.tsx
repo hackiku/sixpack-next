@@ -1,4 +1,5 @@
 // ~/app/providers/LayoutContext.tsx
+"use client";
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -30,8 +31,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 			const scrollY = window.scrollY;
 			const vh = window.innerHeight;
 
-			// Calculate phases based on scroll position
-			if (scrollY < vh * 0.4) { // Reduced threshold
+			if (scrollY < vh * 0.4) {
 				setScrollPhase('hero');
 				setProgress(scrollY / (vh * 0.4));
 			} else if (scrollY < vh * 1.5) {
