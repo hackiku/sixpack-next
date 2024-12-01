@@ -1,8 +1,8 @@
-// components/demo/AppDemo.tsx
+// ~/app/components/demo/AppDemo.tsx
 
 "use client";
 
-import { motion, useTransform, useScroll } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import type { MotionValue } from 'framer-motion';
 
@@ -12,35 +12,34 @@ interface AppDemoProps {
 
 // Mock screens for the demo
 const DEMO_SCREENS = [
-	{ id: 'home', title: 'Flight Dashboard', bg: 'bg-[#AE7AFF]' },
 	{ id: 'instruments', title: 'Digital Six Pack', bg: 'bg-[#A6FAFF]' },
+	{ id: 'home', title: 'Flight Dashboard', bg: 'bg-[#AE7AFF]' },
 	{ id: 'cat', title: 'Cat Mode', bg: 'bg-[#FFB6C1]' },
 ];
 
 export default function AppDemo({ scrollYProgress }: AppDemoProps) {
 	const containerRef = useRef(null);
-	const { scrollYProgress: localScroll } = useScroll({
-		target: containerRef,
-		offset: ["start end", "end start"]
-	});
 
-	// Initial animation (rotation and position)
-	const rotate = useTransform(scrollYProgress, [0, 0.2], [12, 0]);
+	// Quick initial rotation and movement to position (0-15% scroll)
+	const rotate = useTransform(scrollYProgress, [0, 0.15], [12, 0]);
+
+	// Move to left side quicker (complete by 25% scroll)
 	const x = useTransform(scrollYProgress,
-		[0, 0.2, 0.4, 1],
-		[0, -100, -400, -400] // Moves further left after straightening
+		[0, 0.15, 0.25],
+		[0, -200, -400]  // Moves fully to left side
 	);
-	const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9]);
 
-	// Screen transitions
+	const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.85]);
+
+	// Screen transitions - synced with features (25-75% scroll)
 	const screenIndex = useTransform(scrollYProgress,
-		[0.2, 0.4, 0.6, 0.8],
-		[0, 1, 2, 0]
+		[0.25, 0.4, 0.6, 0.75], // Adjusted timing to match features
+		[0, 1, 2, 2]  // Stay on last screen
 	);
 
-	// Opacity for transition out
+	// Fade out as we leave features section
 	const opacity = useTransform(scrollYProgress,
-		[0.8, 0.9],
+		[0.75, 0.85],
 		[1, 0]
 	);
 
@@ -61,7 +60,7 @@ export default function AppDemo({ scrollYProgress }: AppDemoProps) {
 						{DEMO_SCREENS.map((screen, index) => (
 							<motion.div
 								key={screen.id}
-								className={`absolute inset-0 ${screen.bg} flex items-center justify-center`}
+								className={`absolute inset-0 ${screen.bg} flex flex-col items-center justify-center p-6`}
 								style={{
 									opacity: useTransform(
 										screenIndex,
@@ -70,7 +69,10 @@ export default function AppDemo({ scrollYProgress }: AppDemoProps) {
 									)
 								}}
 							>
-								<span className="text-xl font-bold text-black">{screen.title}</span>
+								<span className="text-xl font-bold text-black text-center mb-2">
+									{screen.title}
+								</span>
+								<div className="w-full h-48 border-2 border-black rounded-lg bg-black/10" />
 							</motion.div>
 						))}
 					</motion.div>
