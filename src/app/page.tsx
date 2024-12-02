@@ -6,7 +6,7 @@ import ResponsiveAppDemo from "~/app/_components/demo/ResponsiveAppDemo";
 
 export default function HomePage() {
 	return (
-		<main className="bg-gray-300/70">
+		<main className="bg-gray-300/70 overflow-hidden">
 			<div
 				className="relative min-h-[300vh]"
 				style={{

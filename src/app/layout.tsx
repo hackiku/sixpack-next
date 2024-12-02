@@ -17,7 +17,7 @@ export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html lang="en" className={`${GeistSans.variable} overflow-x-clip`}>
+		<html lang="en" className={`${GeistSans.variable}`}>
 			<body>
 				<Navbar />
 				<TRPCReactProvider>
